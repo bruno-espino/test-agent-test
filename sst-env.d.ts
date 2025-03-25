@@ -5,6 +5,31 @@
 
 declare module "sst" {
   export interface Resource {
+    "DB": {
+      "database": string
+      "host": string
+      "password": string
+      "port": number
+      "type": "sst.aws.Postgres"
+      "username": string
+    }
+    "Migrations": {
+      "name": string
+      "type": "sst.aws.Function"
+      "url": string
+    }
+    "OrgAPI": {
+      "name": string
+      "type": "sst.aws.Function"
+      "url": string
+    }
+    "Site": {
+      "type": "sst.aws.SvelteKit"
+      "url": string
+    }
+    "VPC": {
+      "type": "sst.aws.Vpc"
+    }
   }
 }
 /// <reference path="sst-env.d.ts" />

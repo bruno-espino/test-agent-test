@@ -9,7 +9,6 @@ export default $config({
       providers: {
         aws: {
           region: "us-east-2",
-          profile: "dm"
         },
         cloudflare: true
       }
@@ -33,10 +32,18 @@ export default $config({
       vpc
     });
 
+    const migrations = new sst.aws.Function("Migrations", {
+      handler: "./api/migrations/migrations.main",
+      link: [db],
+      vpc,
+      url: true
+    });
+
     const myapi = new sst.aws.Function("OrgAPI", {
       handler: "./api/org.main",
       link: [db],
-      vpc
+      vpc,
+      url: true
     });
 
     // const db = new sst.cloudflare.D1("TestReportDB");

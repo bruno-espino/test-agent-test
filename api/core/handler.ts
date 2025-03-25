@@ -15,7 +15,7 @@ export function handler(
         }
 
         const jwt = auth_header.substring("Bearer ".length).trim()
-        if (jwt != "dangerzone") {
+        if (jwt != "dangerzone1337") {
             return unauthorized("Invalid jwt token")
         }
 

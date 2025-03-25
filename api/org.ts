@@ -1,24 +1,24 @@
 import { Resource } from "sst";
-import { Context, LambdaFunctionURLEvent } from "aws-lambda";
 import { Pool } from "pg";
 import { handler } from "./core/handler";
 
 const pool = new Pool({
-    user: Resource.db.username,
-    password: Resource.db.password,
-    database: Resource.db.database,
-    host: Resource.db.host,
-    port: Resource.db.port,
+    user: Resource.DB.username,
+    password: Resource.DB.password,
+    database: Resource.DB.database,
+    host: Resource.DB.host,
+    port: Resource.DB.port,
 });
 
 
-export const main = handler(async (event: LambdaFunctionURLEvent, context: Context) => {
+export const main = handler(async (event, context) => {
     if (!event.body) {
         throw new Error('Missing request body')
     }
     const client = await pool.connect();
     const result = await client.query('SELECT NOW()');
     client.release()
-    return JSON.stringify(`event info: ${event}, context info: ${context}, postgres info: ${client}, result: ${result}`)
+    //return JSON.stringify(`event info: ${event}, context info: ${context}, postgres info: ${client}, result: ${result}`)
+    return 'hi'
 }
 )
